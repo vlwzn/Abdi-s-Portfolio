@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="styles.css">
+
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+require 'config.php';
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Retrieve the artwork to delete the image file
+    $stmt = $pdo->prepare('SELECT image_url FROM artworks WHERE id = ?');
+    $stmt->execute([$id]);
+    $artwork = $stmt->fetch();
+
+    if ($artwork) {
+        // Delete the image file from the server
+        if (file_exists($artwork['image_url'])) {
+            unlink($artwork['image_url']);
+        }
+
+        // Delete the artwork from the database
+        $stmt = $pdo->prepare('DELETE FROM artworks WHERE id = ?');
+        $stmt->execute([$id]);
+
+        echo "Artwork deleted successfully.";
+    } else {
+        echo "Artwork not found.";
+    }
+} else {
+    echo "No artwork ID provided.";
+}
+?>
+
+<a href="dashboard.php">back</a>

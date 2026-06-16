@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');/* styles.css */
+::-webkit-scrollbar {
+    display: none;
+  }
+
+body {
+    background-color: #000000;
+    color: #e8e8e8;
+    font-family: Arial, sans-serif;
+    font-family: "Raleway", sans-serif;
+    font-family: "Jost", sans-serif;
+    font-style: normal;
+    font-optical-sizing: auto;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    /* background-color: #1f1f1f; */
+    margin-top: -1rem;
+    text-align: center;
+    z-index: 100;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 5rem;
+    text-shadow: #121212;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: -0.7rem;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 0.3rem;
+}
+
+nav ul li a {
+    color: #e8e8e8;
+    text-decoration: none;
+}
+
+.home-video {
+    z-index: -10;
+    position: absolute;
+    top: -0.3rem;
+}
+
+.intro {
+    align-items: center;
+    text-align: left;
+    padding-left: 1rem;
+    padding-top: 24rem;
+    width: 90%;
+    height: 60vh;
+}
+
+.intro p {
+    font-size: 5rem;
+}
+
+.featured {
+    padding: 1rem;
+    min-height: 200vh;
+}
+
+.featured h1 {
+    font-size: 5rem;
+}
+
+.artworks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+    padding: 1rem;
+}
+
+.artwork {
+    color: #e8e8e8;
+    /* background-color: #1f1f1f; */
+    border-radius: 15px;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    text-align: left;
+    width: 450px;
+    height: fit-content;
+    float: left;
+}
+
+.artwork img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    color: #acacac;
+    font-weight: normal;
+}
+
+.artwork p {
+    width: 60%;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    z-index: -9;
+    background-color: #1f1f1f;
+    padding: 1rem;
+    text-align: center;
+}
+
+.contact h1 {
+    text-align: left;
+    font-size: 5rem;
+}
+
+.contact p {
+    text-align: left;
+}
+
+.contact p .rights{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+
+footer a {
+    display: block;
+    color: #acacac;
+    text-decoration: none;
+    text-align: left;
+    justify-self: left;
+    place-self: left;
+}
+
+footer a::after {
+    color: #acacac;
+    text-decoration: none;
+    text-align: left;
+}

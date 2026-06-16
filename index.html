@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zaap works</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <header>
+        <h1>zaap</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#featured">Works</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+        <video width="100%" autoplay loop muted class="home-video">
+            <source src="media/draft_shot01.mp4" type="video/mp4" />
+            <!-- <source src="movie.ogg" type="video/ogg" />
+            Your browser does not support the video tag. -->
+        </video>
+        </section>
+        <section class="intro">
+            <p>Hi, we are zaap.<br></p>
+        </section>
+        <!-- Featured Artworks -->
+        <section id="featured" class="featured">
+            <h1>OUR WORKS</h1>
+            <!-- Container ini yang akan diisi otomatis oleh Firebase -->
+            <div class="artworks" id="artwork-container">
+                <p>Loading artworks...</p>
+            </div>
+        </section>
+    </main>
+    <footer id="contact" class="contact">
+        <h1>CONTACT</h1>
+        <p>+628 507300 82400</p>
+        <p>filza.achmad@gmail.com</p>
+        <a href="https://www.instagram.com/filzaap/" target=”_blank”>Instagram (@filzaap)</a>
+        <br>
+        <br>
+        <p class="rights">&copy; 2024 zaap</p>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT FIREBASE INTEGRATION                -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // ---> TEMPEL KODE FIREBASE CONFIG KAMU DI SINI <---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBh1kdCI8viW1Sc9GlSTxjv0GiWEjys3dU",
+            authDomain: "abdi-s-portfolio.firebaseapp.com",
+            projectId: "abdi-s-portfolio",
+            storageBucket: "abdi-s-portfolio.firebasestorage.app",
+            messagingSenderId: "763570378395",
+            appId: "1:763570378395:web:a2e28f7e9af154850c983e"
+        };
+        // ---------------------------------------------------
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadArtworks() {
+            const container = document.getElementById('artwork-container');
+            try {
+                const artworksRef = collection(db, "artworks");
+                const q = query(artworksRef, orderBy("createdAt", "desc")); 
+                const querySnapshot = await getDocs(q);
+                
+                container.innerHTML = ""; // Bersihkan teks "Loading..."
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = "<p>No artworks found.</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const artwork = doc.data();
+                    
+                    // HTML di bawah ini mempertahankan class "artwork" dan "data-aos" persis seperti aslinya
+                    const artworkCard = `
+                        <div class="artwork" data-aos="fade-up">
+                            <img src="${artwork.imageUrl}" alt="${artwork.title}">
+                            <h2>${artwork.title}</h2>
+                            <p>${artwork.description || ''}</p>
+                        </div>
+                    `;
+                    container.innerHTML += artworkCard;
+                });
+
+            } catch (error) {
+                console.error("Error mengambil data: ", error);
+                container.innerHTML = "<p>Failed to load data.</p>";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadArtworks);
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
