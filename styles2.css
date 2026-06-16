@@ -3,6 +3,18 @@
 ::-webkit-scrollbar {
     display: none;
   }
+/* Aturan khusus untuk layar HP (lebar maksimal 768px) */
+@media (max-width: 768px) {
+    /* Sesuaikan nama class atau tag dengan yang kamu gunakan di HTML */
+    header h1 {
+        font-size: 32px; /* Mengecilkan judul utama */
+    }
+    
+    header nav a {
+        font-size: 16px; /* Mengecilkan teks menu navigasi */
+        margin: 0 5px;   /* Mengurangi jarak antar menu agar tidak turun baris */
+    }
+}
 
 body {
     background-color: #000000;
